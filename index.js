@@ -16,11 +16,11 @@
 function processFirstItem(stringList, callback) {
   return callback(stringList[0]);
 }
-console.log(
-  processFirstItem(["foo", "bar"], function (str) {
-    return str + str;
-  })
-);
+//console.log(
+//processFirstItem(["foo", "bar"], function (str) {
+//  return str + str;
+//})
+//);
 
 // ⭐️ Example Challenge END ⭐️
 
@@ -56,7 +56,7 @@ let count = 0;
 function counter2() {
   return count++;
 }
-console.log(counterMaker());
+//console.log(counterMaker());
 
 /* ⚾️⚾️⚾️ Task 2: inning() ⚾️⚾️⚾️
 Use the inning function below to do the following:
@@ -72,7 +72,7 @@ function inning() {
   //random operator
   return Math.floor(Math.random() * 3);
 }
-console.log(inning());
+//console.log(inning());
 
 /* ⚾️⚾️⚾️ Task 3: finalScore() ⚾️⚾️⚾️
 Use the finalScore function below to do the following:
@@ -103,7 +103,7 @@ function finalScore(inningcb, number) {
     Away: awayScore,
   };
 }
-console.log(finalScore(inning, 9));
+//console.log(finalScore(inning, 9));
 
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
 Use the getInningScore() function below to do the following:
@@ -160,10 +160,28 @@ Use the scoreboard function below to do the following:
   "This game will require extra innings: Away 10 - Home 10"
 ]  
   */
-//three parameters
-function scoreboard(/* CODE HERE */) {
+//three parameters that i need to recieve
+function scoreboard(getInningScore, inningcb, numberOfInning) {
   /* CODE HERE */
+  const newArray = [];
+  let homeScore = 0;
+  let awayScore = 0;
+  for (let i = 0; i < numberOfInning; i++) {
+    const currentScore = getInningScore(inningcb);
+    homeScore = homeScore + inningcb();
+    awayScore = awayScore + inningcb();
+    newArray.push(`Inning ${i + 1}: Away ${awayScore} - Home ${homeScore}`);
+  }
+  if (homeScore === awayScore) {
+    newArray.push(
+      `This game will require extra innings: Away ${awayScore} - Home ${homeScore}`
+    );
+  } else {
+    newArray.push(`Final score: Away ${awayScore} - Home ${homeScore}`);
+  }
+  return newArray;
 }
+console.log(scoreboard(getInningScore, inning, 9));
 
 /* 🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑 */
 function foo() {
